@@ -8,10 +8,10 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableWebMvc
 @EnableScheduling
 @SpringBootApplication
-public class ExamenNouraMathlouthi4Sae2Application {
+public class PidevApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ExamenNouraMathlouthi4Sae2Application.class, args);
+		SpringApplication.run(PidevApplication.class, args);
 	}
 
 }
