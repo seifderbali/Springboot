@@ -1,8 +1,8 @@
 package tn.esprit.entities;
 
-import java.sql.Date;
+import java.io.Serializable;
+import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,13 +10,24 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 
 
 @Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "offre")
-public class Offre {
+public class Offre implements Serializable{
 
 	
 	@Id
@@ -28,54 +39,17 @@ public class Offre {
 	@Column(name="description")
 	private String description; 
 	@Column(name="startDate")
+	@Temporal(TemporalType.DATE)
 	private Date startDate; 
 	@Column(name="endDate")
+	@Temporal(TemporalType.DATE)
 	private Date endDate; 
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	
+	
+	@ManyToOne
 	private Collaboration collaboration;
 	
 	
-	public long GetId() {
-		return id;
-	}
-	public void SetId(long id) {
-		this.id = id;
-	}
-	public String GetNom() {
-		return nom;
-	}
-	public void SetNom(String nom) {
-		this.nom = nom;
-	}
-	public String GetDescription() {
-		return description;
-	}
-	public void SetDescription(String description) {
-		this.description = description;
-	}
-	public Date GetStartDate() {
-		return startDate;
-	}
-	public void SetStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
-	public Date GetEndDate() {
-		return endDate;
-	}
-	public void SetEndDate(Date endDate) {
-		this.endDate = endDate;
-	}
-	
-	
 
-	public Offre(long id, String nom, String description, Date startDate, Date endDate){
-		this.id = id;
-		this.nom = nom;
-		this.description = description;
-		this.startDate = startDate;
-		this.endDate = endDate;
-
-
-	}
 	}

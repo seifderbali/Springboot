@@ -1,7 +1,10 @@
 package tn.esprit.entities;
 
 
-import javax.persistence.CascadeType;
+
+import java.io.Serializable;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,10 +13,19 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 
 	@Entity
-	@Table(name = "like")
-	public class Like {
+	@Getter
+	@Setter
+	@AllArgsConstructor
+	@NoArgsConstructor
+	@Table(name = "liked")
+	public class Like implements Serializable{
 
 		@Id
 		@GeneratedValue (strategy = GenerationType.IDENTITY)
@@ -24,35 +36,10 @@ import javax.persistence.Table;
 		@Column(name="userid")
 		private Long userid; 
 	
-		@ManyToOne(cascade = CascadeType.ALL)
+		
+		@ManyToOne
 		private Comment comment;
 		
 		
-		public long Getid() {
-			return id;
-		}
-		public void Setid(long id) {
-			this.id = id;
-		}
-		public int GetEtat() {
-			return etat;
-		}
-		public void SetEtat(int etat) {
-			this.etat = etat;
-		}
-		public Long GetUserid() {
-			return userid;
-		}
-		public void SetUserid(Long userid) {
-			this.userid = userid;
-		}
-		
-		
-
-		public Like(long id, int etat, long userid){
-			this.id = id;
-			this.etat = etat;
-			this.userid = userid;
-
-		}}
+}
 

@@ -1,6 +1,7 @@
 package tn.esprit.entities;
 
-import java.sql.Date;
+import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -11,14 +12,27 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 
 
 
 
 	@Entity
+	@Getter
+	@Setter
+	@ToString
+	@AllArgsConstructor
+	@NoArgsConstructor
 	@Table(name = "collaboratoin")
-	public class Collaboration {
+	public class Collaboration implements Serializable{
 		
 		@Id
 		@GeneratedValue (strategy = GenerationType.IDENTITY)
@@ -27,39 +41,16 @@ import javax.persistence.Table;
 		@Column(name="nom")
 		private String nom; 
 		@Column(name="date")
+		@Temporal(TemporalType.DATE)
 		private Date date; 
 		
-		@OneToMany(cascade = CascadeType.ALL,mappedBy="offre")
+		
+		
+		@OneToMany(cascade = CascadeType.ALL,mappedBy="collaboration")
 		private Set<Offre> offre;
 		
 		
-		public long Getid() {
-			return id;
-		}
-		public void Setid(long id) {
-			this.id = id;
-		}
-		public String Getnom() {
-			return nom;
-		}
-		public void Setnom(String nom) {
-			this.nom = nom;
-		}
-		public Date GetDate() {
-			return date;
-		}
-		public void SetDate(Date date) {
-			this.date = date;
-		}
-		
-		
 
-		public Collaboration(long id, String nom, Date date){
-			this.id = id;
-			this.nom = nom;
-			this.date = date;
-
-		}
 
 
 }

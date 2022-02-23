@@ -1,6 +1,7 @@
 package tn.esprit.entities;
 
-import java.sql.Date;
+import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -12,11 +13,22 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 	@Entity
+	@Getter
+	@Setter
+	@AllArgsConstructor
+	@NoArgsConstructor
 	@Table(name = "comment")
-	public class Comment {
+	public class Comment implements Serializable{
 
 		@Id
 		@GeneratedValue (strategy = GenerationType.IDENTITY)
@@ -25,47 +37,21 @@ import javax.persistence.Table;
 		@Column(name="contenu")
 		private String contenu; 
 		@Column(name="date")
+		@Temporal(TemporalType.DATE)
 		private Date date; 
 		@Column(name="userid")
 		private Long userid; 
 		
-		@ManyToOne(cascade = CascadeType.ALL)
+	//	private list<int> listUserLike;
+	//	private Set<int> listUserDislike;
+
+	
+		@ManyToOne()
 		private Forum forum;
-		@OneToMany(cascade = CascadeType.ALL,mappedBy="like")
+		
+		
+		@OneToMany(cascade = CascadeType.ALL,mappedBy="comment")
 		private Set<Like> like;
 		
-		
-		public long Getid() {
-			return id;
-		}
-		public void Setid(long id) {
-			this.id = id;
-		}
-		public String GetContenu() {
-			return contenu;
-		}
-		public void SetContenu(String contenu) {
-			this.contenu = contenu;
-		}
-		public Date GetDate() {
-			return date;
-		}
-		public void SetDate(Date date) {
-			this.date = date;
-		}
-		public Long GetUserid() {
-			return userid;
-		}
-		public void SetUserid(Long userid) {
-			this.userid = userid;
-		}
-		
-		
 
-		public Comment(long id, String contenu, Date date, long userid){
-			this.id = id;
-			this.contenu = contenu;
-			this.date = date;
-			this.userid = userid;
-
-		}}
+		}
