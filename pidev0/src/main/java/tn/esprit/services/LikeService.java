@@ -22,7 +22,6 @@ public class LikeService implements ILikeService {
 			listLikes = (List<Like>) likeReposiory.findAll();
 			for(Like f : listLikes)
 			{
-				f.getComment().setLike(null);;		
 				 System.out.println("user = "+f);
 			}}
 			catch(Exception e)
@@ -78,7 +77,6 @@ public class LikeService implements ILikeService {
 	public Like retrieveLike(long id) {
 		Like f = new Like();
 		try {
-			//f.getComment().setLike(null);;		
 		 f = likeReposiory.findById(id).get();
 			}
 		catch(Exception e)
@@ -87,5 +85,25 @@ public class LikeService implements ILikeService {
 		}
 		return f ;
 	   }
+
+	@Override
+	public Like retrieveUser(Like f, int id) {
+		 System.out.println("@@@@@@@@@@@");
+		 System.out.println(f.getUserid());
+	//	 System.out.println(f.getComment().getId());
+
+		return likeReposiory.findUser(f.getUserid(),id);
+	}
+
+	@Override
+	public String nblike(int id) {
+		int like=likeReposiory.nblike(id);
+		int dislike=likeReposiory.nbdislike(id);
+		float p= ((float)like/((float)like+(float)dislike))*100;
+		String slike=String.valueOf(like);
+		String sdislike=String.valueOf(dislike);
+
+		return "Likes :"+slike+"  :   "+String.valueOf((int)p)+"%    Dislikes :"+sdislike+"  :  "+String.valueOf(100-(int)p)+"%";
+	}
 	}
 

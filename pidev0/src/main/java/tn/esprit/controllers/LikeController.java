@@ -14,39 +14,48 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import tn.esprit.entities.Like;
+import tn.esprit.services.CommentService;
 import tn.esprit.services.LikeService;
 
 
 	@RestController
 	@RequestMapping("/Like")
 	public class LikeController {
-
+    
 		@Autowired
 		LikeService Ls;
-		@PostMapping("/addlike") 
-		void add(@RequestBody Like f)
+		@Autowired
+		CommentService Cs;
+
+		@PostMapping("/addlike/{id}") 
+		void add(@RequestBody Like f,@PathVariable("id") int id)
 		{
-			Ls.addLike(f);
+			Like l= new Like();
+			l=Ls.retrieveUser(f,id);
+			f.setComment(Cs.retrieveComment(id));
+			
+			if(l == null) {
+				Ls.addLike(f);
+			}
+			else if(l.getEtat()==f.getEtat()) {
+				Ls.deleteLike(l.getId());
+			}
+			else {
+				Ls.deleteLike(l.getId());
+				Ls.addLike(f);
+			}
 		}
-		@PutMapping("/updatelike")
-		void update(@RequestBody Like f)
-		{
-			Ls.updateLike(f);
-		}
-		@DeleteMapping("/deletelike/{id}")
-		void delete(@PathVariable("id") int id)
-		{
-			Ls.deleteLike(id);
-		}
+		
 		@GetMapping("/displaylike")
 		List<Like> display()
 		{
 			return Ls.retreiveAllLikes();
 		}
-		@GetMapping("/find/{id}")
-		Like find(@PathVariable("id") int id)
+
+		@GetMapping("/count/{id}")
+		String count(@PathVariable("id") int id)
 		{
-			return Ls.retrieveLike(id);
+			return Ls.nblike(id);
 		}
 		}
 

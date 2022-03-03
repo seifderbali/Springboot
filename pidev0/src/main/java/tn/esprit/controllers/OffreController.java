@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import tn.esprit.entities.Offre;
+import tn.esprit.services.CollaborationService;
 import tn.esprit.services.OffreService;
 
 
@@ -27,9 +28,12 @@ import tn.esprit.services.OffreService;
 		
 		@Autowired
 		OffreService Os;
-		@PostMapping("/addoffre") 
-		void add(@RequestBody Offre f)
+		@Autowired
+		CollaborationService Cs;
+		@PostMapping("/addoffre/{id}") 
+		void add(@RequestBody Offre f,@PathVariable("id") int id)
 		{
+			f.setCollaboration(Cs.retrieveCollaboration(id));
 			Os.addOffre(f);
 		}
 		@PutMapping("/updateoffre")
@@ -52,5 +56,11 @@ import tn.esprit.services.OffreService;
 		{
 			return Os.retrievOffre(id);
 		}
+		@GetMapping("/available/{id}")
+		String available(@PathVariable("id") int id)
+		{
+			return Os.available(id);
+		}
+		
 		}
 

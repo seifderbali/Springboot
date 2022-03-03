@@ -25,13 +25,16 @@ import tn.esprit.services.ForumService;
 		
 	@Autowired
 	ForumService Fs;
-	
+
 	@PostMapping("/addforum") 
 	void add(@RequestBody Forum f)
 	{
-	 Fs.addForum(f);
+		if(Fs.swearAction(f.getContenu()) ==0) {
+			Fs.addForum(f);
+		}
+		
 	}
-	@PutMapping("/updateforum")
+	@PutMapping("/updateforum/{id}")
 	void update(@RequestBody Forum f)
 	{
 		Fs.updateForum(f);
@@ -41,16 +44,37 @@ import tn.esprit.services.ForumService;
 	{
 		Fs.deleteForum(id);
 	}
-	//@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/displayforums")
 	List<Forum> display()
 	{
 		return Fs.retreiveAllForums();
 	}
-	//@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/find/{id}")
 	Forum find(@PathVariable("id") int id)
 	{
 		return Fs.retrieveForum(id);
 	}
+	
+	@GetMapping("/search/{keyword}")
+	List<Forum> search(@PathVariable("keyword") String keyword)
+	{
+		return Fs.searchForums(keyword);
+	}
+	
+	@GetMapping("/test/{keyword}")
+	String test(@PathVariable("keyword") String keyword)
+	{
+		return keyword;
+	}
+	@GetMapping("/stats/{id}")
+	int stats(@PathVariable("id") int id)
+	{
+		return Fs.stats(id);
+	}
+	/*
+	@GetMapping("/viral/{id}")
+	int viral(@PathVariable("id") int id)
+	{
+		return Fs.viral(id);
+	}*/
 	}

@@ -3,7 +3,6 @@ package tn.esprit.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import tn.esprit.entities.Comment;
 import tn.esprit.services.CommentService;
+import tn.esprit.services.ForumService;
 
 @RestController
 @RequestMapping("/Comment")
@@ -22,10 +22,15 @@ public class CommentController {
 
 	@Autowired
 	CommentService Cs;
-	@PostMapping("/addcomment") 
-	void add(@RequestBody Comment f)
+	@Autowired
+	ForumService Fs;
+	@PostMapping("/addcomment/{id}") 
+	void add(@RequestBody Comment f,@PathVariable("id") int id)
 	{
+		if(Fs.swearAction(f.getContenu()) ==0) {
+		f.setForum(Fs.retrieveForum(id));
 		Cs.addComment(f);
+		}
 	}
 	@PutMapping("/updatecomment")
 	void update(@RequestBody Comment f)

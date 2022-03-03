@@ -15,6 +15,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -43,6 +46,7 @@ public class Forum implements Serializable{ //
 	 String contenu; 
 	@Column(name="date")
 	@Temporal(TemporalType.DATE)
+    @JsonFormat(pattern="yyyy-MM-dd")
 	 Date date; 
 	@Column(name="userid")
 	 Long userid; 

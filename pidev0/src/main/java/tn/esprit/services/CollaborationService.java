@@ -27,7 +27,6 @@ CollaborationRepository collaborationReposiory;
 				 System.out.println("user = "+f);
 				 
 				 
-					 f.setOffre(null);
 				 
 			}}
 			catch(Exception e)

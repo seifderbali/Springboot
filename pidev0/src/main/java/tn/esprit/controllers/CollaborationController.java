@@ -37,13 +37,11 @@ public class CollaborationController {
 	{
 		Cos.deleteCollaboration(id);
 	}
-	//@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/displaycollaborations")
 	List<Collaboration> display()
 	{
 		return Cos.retreiveAllCollaborations();
 	}
-	//@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/find/{id}")
 	Collaboration find(@PathVariable("id") int id)
 	{

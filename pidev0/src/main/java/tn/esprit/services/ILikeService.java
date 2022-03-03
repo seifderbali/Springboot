@@ -10,6 +10,7 @@ public interface ILikeService {
 	void deleteLike(long id);
 	Like updateLike(Like f);
 	Like retrieveLike(long id);
-
+	Like retrieveUser(Like l,int id);
+	String nblike(int id);
 
 }

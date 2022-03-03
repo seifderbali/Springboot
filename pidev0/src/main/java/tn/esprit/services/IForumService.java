@@ -11,5 +11,12 @@ public interface IForumService {
 	void deleteForum(long id);
 	Forum updateForum(Forum f);
 	Forum retrieveForum(long id);
+	List<Forum> searchForums(String keyword);
+	int swearAction(String  ch) ;
+	List<String> listswears() ;
+	int stats(int id) ;
+	//int viral(int id) ;
+
+
 
 }

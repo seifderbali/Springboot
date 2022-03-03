@@ -15,6 +15,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -42,8 +45,8 @@ import lombok.ToString;
 		private String nom; 
 		@Column(name="date")
 		@Temporal(TemporalType.DATE)
+	    @JsonFormat(pattern="yyyy-MM-dd")
 		private Date date; 
-		
 		
 		
 		@OneToMany(cascade = CascadeType.ALL,mappedBy="collaboration")

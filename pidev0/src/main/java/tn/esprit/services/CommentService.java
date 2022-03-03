@@ -24,7 +24,6 @@ public List<Comment> retreiveAllComments() {
 		listComments = (List<Comment>) commentReposiory.findAll();
 		for(Comment f : listComments)
 		{
-			f.getForum().setComment(null);
 			 System.out.println("user = "+f);
 		}}
 		catch(Exception e)
@@ -39,7 +38,10 @@ public List<Comment> retreiveAllComments() {
 public Comment addComment(Comment f) {
 	try
 	{
-	commentReposiory.save(f);
+		
+	 commentReposiory.save(f);
+	
+
 	}
 	catch(Exception e)
 	{
@@ -78,7 +80,6 @@ public Comment updateComment(Comment f) {
 public Comment retrieveComment(long id) {
 	Comment f = new Comment();
 	try{
-	//	f.getForum().setComment(null);
 	 f = commentReposiory.findById(id).get();
 		}
 	catch(Exception e)
