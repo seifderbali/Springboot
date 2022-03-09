@@ -20,7 +20,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 
 
@@ -49,12 +48,15 @@ public class Offre implements Serializable{
 	@Temporal(TemporalType.DATE)
     @JsonFormat(pattern="yyyy-MM-dd")
 	private Date endDate; 
-	
+	@Column(name="phone")
+	private String phone; 
 	
 	@JsonIgnore
 	@ManyToOne
 	private Collaboration collaboration;
-	
+
+
 	
 
+	
 	}

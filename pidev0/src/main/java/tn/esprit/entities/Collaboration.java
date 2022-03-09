@@ -43,6 +43,8 @@ import lombok.ToString;
 		private Long id; 
 		@Column(name="nom")
 		private String nom; 
+		@Column(name="mail")
+		private String mail; 
 		@Column(name="date")
 		@Temporal(TemporalType.DATE)
 	    @JsonFormat(pattern="yyyy-MM-dd")

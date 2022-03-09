@@ -14,6 +14,7 @@ public interface ForumRepository extends CrudRepository<Forum, Long>{
 
 	@Query("select f from Forum f where f.contenu like %?1% or f.date like %?1%")
 	List<Forum> search(String keyword);
+//	List<Forum> findByContenuLikeOrDateLike(String contenu, String date);
 	
 	@Query("select word from swear_words")
 	List<String> listSwear();
@@ -24,8 +25,24 @@ public interface ForumRepository extends CrudRepository<Forum, Long>{
 	@Query(value="select count(*) from Comment c where c.forum_id = ?1",nativeQuery=true)
 	int nbcomment(int id);
 	
+	@Query(value="select * from forum where id IN (select f.id from forum f "
+			+ "JOIN comment c ON f.id = c.forum_id\n"
+			+ "JOIN liked l ON c.id = l.comment_id\n"
+			+ "WHERE c.userid = ?1 OR l.userid = ?1)",nativeQuery=true)
+	List<Forum> display(int id);
 	
+	@Query(value="select * from forum where id NOT IN (select f.id from forum f "
+			+ "JOIN comment c ON f.id = c.forum_id\n"
+			+ "JOIN liked l ON c.id = l.comment_id\n"
+			+ "WHERE c.userid = ?1 OR l.userid = ?1)",nativeQuery=true)
+	List<Forum> display2(int id);
 	/*
+
+	@Query("SELECT f FROM Forum f WHERE f.comment = (SELECT MAX(c.nbLike) FROM Comment c WHERE f.comment = c )")
+	Forum viral();
+	
+	
+	
 	@Query(value="SELECT * FROM forum a \n"
 			+ "  JOIN comment b ON a.comment_id = b.id\n"
 			+ "  JOIN forum c ON b.forum_id = c.id\n"

@@ -25,7 +25,7 @@ public class likeTest {
 		Like l = new Like();
 		l = ifs.retrieveLike(1);
 		//System.out.println(ifs.retrieveUser(l).getEtat());
-		//System.out.println(ifs.retrieveUser(l).getId());
+		//fSystem.out.println(ifs.retrieveUser(l).getId());
 
 
 

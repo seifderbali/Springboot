@@ -88,5 +88,31 @@ public Comment retrieveComment(long id) {
 	}
 	return f ;
    }
+
+@Override
+public int countlikes(long id) {
+	Comment f = new Comment();
+	f = commentReposiory.findById(id).get();
+	f.setNbLike(commentReposiory.countlike(id));
+	return f.getNbLike();
+}
+
+@Override
+public int countdislikes(long id) {
+	Comment f = new Comment();
+	f = commentReposiory.findById(id).get();
+	f.setNbDislike(commentReposiory.countdislike(id));
+	return f.getNbDislike();
+}
+
+@Override
+public void setCount(long id) {
+	Comment f = new Comment();
+	f = commentReposiory.findById(id).get();
+	f.setNbDislike(commentReposiory.countdislike(id));
+	f.setNbLike(commentReposiory.countlike(id));
+
+}
+
 }
 

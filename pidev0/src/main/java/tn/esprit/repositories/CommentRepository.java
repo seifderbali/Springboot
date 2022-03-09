@@ -11,6 +11,12 @@ import tn.esprit.entities.Comment;
 @Repository
 public interface CommentRepository extends CrudRepository<Comment, Long>{
 	
+	
+	
+	@Query(value="select count(*) from liked l where l.etat = 1 and l.comment_id = ?1",nativeQuery=true)
+	int countlike(long id);
+	@Query(value="select count(*) from liked l where l.etat = -1 and l.comment_id = ?1",nativeQuery=true)
+	int countdislike(long id);
 /*
 	 
  	Comment	findOneByContenu(String contenu);

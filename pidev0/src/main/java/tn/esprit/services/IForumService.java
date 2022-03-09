@@ -15,8 +15,8 @@ public interface IForumService {
 	int swearAction(String  ch) ;
 	List<String> listswears() ;
 	int stats(int id) ;
-	//int viral(int id) ;
-
+	List<Forum> display(int id) ;
+	//Forum viral();
 
 
 }

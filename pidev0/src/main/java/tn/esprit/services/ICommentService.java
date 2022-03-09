@@ -11,6 +11,10 @@ public interface ICommentService {
 		void deleteComment(long id);
 		Comment updateComment(Comment f);
 		Comment retrieveComment(long id);
+		int countlikes(long id);
+		int countdislikes(long id);
+		void setCount(long id);
+
 }
 
 

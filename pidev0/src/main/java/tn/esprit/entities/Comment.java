@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -45,7 +46,14 @@ import lombok.Setter;
 		private Date date; 
 		@Column(name="userid")
 		private Long userid; 
-	
+		
+		@Transient
+		@JsonIgnore
+		private int nbLike;
+		@Transient
+		@JsonIgnore
+		private int nbDislike;
+		
 	
 		@ManyToOne
 		@JsonIgnore

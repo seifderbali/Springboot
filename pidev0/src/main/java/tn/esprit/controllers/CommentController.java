@@ -52,6 +52,11 @@ public class CommentController {
 	{
 		return Cs.retrieveComment(id);
 	}
+	@GetMapping("/count/{id}")
+	int count(@PathVariable("id") int id)
+	{
+		return Cs.countlikes(id);
+	}
 	}
 
 

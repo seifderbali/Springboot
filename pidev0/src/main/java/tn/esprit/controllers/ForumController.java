@@ -1,5 +1,6 @@
 package tn.esprit.controllers;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.google.zxing.WriterException;
 
 import tn.esprit.entities.Forum;
 import tn.esprit.services.ForumService;
@@ -71,10 +74,31 @@ import tn.esprit.services.ForumService;
 	{
 		return Fs.stats(id);
 	}
-	/*
-	@GetMapping("/viral/{id}")
-	int viral(@PathVariable("id") int id)
+	@GetMapping("/display/{id}")
+	List<Forum> displaytri(@PathVariable("id") int id)
 	{
-		return Fs.viral(id);
-	}*/
+		return Fs.display(id);
 	}
+	
+	@RequestMapping("/generate/{id}")
+	void GenerateQrCode(@PathVariable("id") int id) throws WriterException, IOException
+	{
+		Forum f = new Forum();
+		f=Fs.retrieveForum(id);
+		Fs.generateQRCodeImage(f.toString(),id);
+	}
+	
+	
+	/*
+	
+	
+		
+	
+	@GetMapping("/viral")
+	Forum viral()
+	{
+		return Fs.viral();
+	}
+	*/
+	}
+	
